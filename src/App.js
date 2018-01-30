@@ -1,14 +1,26 @@
 import React, { Component } from 'react';
-import Searchbar from './components/Searchbar';
 import Profilecards from './components/Profilecards';
 import './styles/profilecards.css';
+import './styles/searchbar.css';
+
 
 class App extends Component {
-    constructor(props){
-     super(props);
-     this.state = {
-       cards: []
-   };
+
+  constructor(props){
+    super(props);
+    this.state = {
+      cards: [],
+      searchvalue:"",
+   }
+   this.handelChange = this.handelChange.bind(this);
+ }
+
+
+
+  handelChange(event) {
+   this.setState({
+     searchvalue: event.target.value
+   }) ;
  }
 
  componentDidMount () {
@@ -23,13 +35,16 @@ class App extends Component {
     })
  }
   render() {
+    const filtervalue = this.state.cards.filter((card) => {
+      return card.name.toLowerCase().includes(this.state.searchvalue)
+    });
     return (
       <div className="App">
-      <Searchbar />
+      <h1>Harry el Sucio</h1>
+      <input type="text" name="" className="searchbar" value={this.searchvalue} onChange={this.handelChange}/>
        <div className="cards-container">
-       {this.state.cards.map(function(card, index) { //Do not understand the map funcion
-       return ()
-        <Profilecards card={card}/>
+       {filtervalue.map(function(card) {
+       return <Profilecards card={card}/>
        })}
        </div>
 
