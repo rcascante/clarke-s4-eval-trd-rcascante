@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Searchbar from './components/Searchbar';
 import Profilecards from './components/Profilecards';
 import './styles/profilecards.css';
 
@@ -24,9 +25,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      <Searchbar />
        <div className="cards-container">
-       {this.state.cards.map(function(card) { //Do not understand the map funcion
-       return <Profilecards card={card} />
+       {this.state.cards.map(function(card, index) { //Do not understand the map funcion
+       return ()
+        <Profilecards card={card}/>
        })}
        </div>
 
